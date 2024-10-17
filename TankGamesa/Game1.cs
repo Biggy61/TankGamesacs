@@ -10,6 +10,7 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private Texture2D _texture;
+    private Vector2 _spritePosition = Vector2.Zero;
     
     public Game1()
     {
@@ -28,11 +29,8 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-        // TODO: use this.Content to load your game content here
         _texture = new Texture2D(GraphicsDevice, 1, 1);
         _texture.SetData<Color>(new Color[] { Color.White });
-        _texture = Content.Load<Texture2D>(@"JpzE100");
     }
 
     protected override void Update(GameTime gameTime)
@@ -46,19 +44,19 @@ public class Game1 : Game
 
         if (state.IsKeyDown(Keys.Right))
         {
-            spritePosition.X += 1;
+            _spritePosition.X += 1;
         }
         if (state.IsKeyDown(Keys.Left))
         {
-            spritePosition.X -= 1;
+            _spritePosition.X -= 1;
         }
         if (state.IsKeyDown(Keys.Up))
         {
-            spritePosition.Y -= 1;
+            _spritePosition.Y -= 1;
         }
         if (state.IsKeyDown(Keys.Down))
         {
-            spritePosition.Y += 1;
+            _spritePosition.Y += 1;
         }
         // TODO: Add your update logic here
 
@@ -70,14 +68,10 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-
+        Rectangle rectangle = new Rectangle(0,0, 50, 50);
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
-
-        var rectangle = new Rectangle(100,100, 100, 100);
-        
-        _spriteBatch.Draw(_texture, rectangle, Color.White);
-
+        _spriteBatch.Draw(_texture, _spritePosition, rectangle, Color.White);
         _spriteBatch.End();
         
         
