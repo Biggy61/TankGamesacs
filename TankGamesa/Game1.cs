@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Media;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,8 +9,8 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private Texture2D _texture;
-    private Vector2 _spritePosition = Vector2.Zero;
+    public Texture2D _texture;
+   
 
     public Game1()
     {
@@ -21,7 +22,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-
+        Player player = new Player();
         base.Initialize();
     }
 
@@ -38,36 +39,17 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
-        KeyboardState state = Keyboard.GetState();
-        if (state.IsKeyDown(Keys.Right))
-        {
-            _spritePosition.X += 1;
-        }
-        if (state.IsKeyDown(Keys.Left))
-        {
-            _spritePosition.X -= 1;
-        }
-        if (state.IsKeyDown(Keys.Up))
-        {
-            _spritePosition.Y -= 1;
-        }
-        if (state.IsKeyDown(Keys.Down))
-        {
-            _spritePosition.Y += 1;
-        }
-
+        Player player = new Player();
+        player.Move();
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
+        
         GraphicsDevice.Clear(Color.CornflowerBlue);
-
-        var rectangle = new Rectangle(0, 0, 200, 200);
-
         _spriteBatch.Begin();
-        _spriteBatch.Draw(_texture, _spritePosition, rectangle, Color.White);
+        _spriteBatch.Draw(_texture, Player._spritePosition , Color.White);
         _spriteBatch.End();
 
         base.Draw(gameTime);
