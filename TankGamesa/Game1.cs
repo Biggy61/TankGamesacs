@@ -11,6 +11,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     Player player;
     Bullet bullet;
+    KeyboardState state = Keyboard.GetState();
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -20,6 +21,9 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
+        Window.AllowUserResizing = true;
+        Window.AllowAltF4 = true;
+        
         // TODO: Add your initialization logic here
         
         base.Initialize();
@@ -29,14 +33,13 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         Texture2D playerTexture;
-        playerTexture = new Texture2D(GraphicsDevice, 1, 1);
-        playerTexture.SetData<Color>(new Color[] { Color.White });
+        //playerTexture = new Texture2D(GraphicsDevice, 1, 1);
+        //playerTexture.SetData<Color>(new Color[] { Color.White });
         playerTexture = Content.Load<Texture2D>(@"JpzE100");
         player = new Player(playerTexture, Vector2.Zero, 2f);
         
         Texture2D bulletTexture;
         bulletTexture = new Texture2D(GraphicsDevice, 1, 1);
-        
         bulletTexture.SetData<Color>(new Color[] { Color.White });
         bulletTexture = Content.Load<Texture2D>(@"Round");
         bullet = new Bullet(bulletTexture, Vector2.Zero, 2f);
@@ -53,13 +56,11 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        
         GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin();
-        _spriteBatch.Draw(player.texture, Player.spritePosition , Color.White);
-        _spriteBatch.Draw(bullet.texture, bullet.position , Color.White);
+        _spriteBatch.Draw(player.texture, Player.spritePosition, Color.White);
+        _spriteBatch.Draw(bullet.texture, bullet.position, Color.White);   
         _spriteBatch.End();
-
         base.Draw(gameTime);
     }
 }
