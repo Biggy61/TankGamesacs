@@ -2,9 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\TankGamesa",
-    "\\TankGamesa\\Content",
-    "\\TankGamesa\\Sprites"
+    "\\TankGamesa\\Content"
   ],
-  "SelectedNode": "\\TankGamesa\\Sprites",
+  "SelectedNode": "\\TankGamesa\\Content\\Content.mgcb",
   "PreviewInSolutionExplorer": false
 }

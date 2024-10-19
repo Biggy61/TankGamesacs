@@ -5,31 +5,35 @@ using SharpDX.Direct3D9;
 
 namespace TankGamesa;
 
-public class Player
+public class Player : Sprite
 {
-    public static Vector2 _spritePosition = Vector2.Zero;
+    public static Vector2 spritePosition = Vector2.Zero;
+    public Player(Texture2D texture, Vector2 position, float speed) : base(texture, position, speed)
+    {
+    }
+
     public void Move()
     {
            KeyboardState state = Keyboard.GetState();
         
                     if (state.IsKeyDown(Keys.D))
                     {
-                        _spritePosition.X += 1;
+                        spritePosition.X += speed;
                     }
         
                     if (state.IsKeyDown(Keys.A))
                     {
-                        _spritePosition.X -= 1;
+                        spritePosition.X -= speed;
                     }
         
                     if (state.IsKeyDown(Keys.W))
                     {
-                        _spritePosition.Y -= 1;
+                        spritePosition.Y -= speed;
                     }
         
                     if (state.IsKeyDown(Keys.S))
                     {
-                        _spritePosition.Y += 1;
+                        spritePosition.Y += speed;
                     }
     }
          

@@ -9,9 +9,8 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    public Texture2D _texture;
-   
-
+    Player player;
+    Bullet bullet;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -22,16 +21,25 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        Player player = new Player();
+        
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        _texture = new Texture2D(GraphicsDevice, 1, 1);
-        _texture.SetData<Color>(new Color[] { Color.White });
-        _texture = Content.Load<Texture2D>(@"JpzE100");
+        Texture2D playerTexture;
+        playerTexture = new Texture2D(GraphicsDevice, 1, 1);
+        playerTexture.SetData<Color>(new Color[] { Color.White });
+        playerTexture = Content.Load<Texture2D>(@"JpzE100");
+        player = new Player(playerTexture, Vector2.Zero, 2f);
+        
+        Texture2D bulletTexture;
+        bulletTexture = new Texture2D(GraphicsDevice, 1, 1);
+        
+        bulletTexture.SetData<Color>(new Color[] { Color.White });
+        bulletTexture = Content.Load<Texture2D>(@"Round");
+        bullet = new Bullet(bulletTexture, Vector2.Zero, 2f);
     }
 
     protected override void Update(GameTime gameTime)
@@ -39,7 +47,6 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-        Player player = new Player();
         player.Move();
         base.Update(gameTime);
     }
@@ -49,7 +56,8 @@ public class Game1 : Game
         
         GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin();
-        _spriteBatch.Draw(_texture, Player._spritePosition , Color.White);
+        _spriteBatch.Draw(player.texture, Player.spritePosition , Color.White);
+        _spriteBatch.Draw(bullet.texture, bullet.position , Color.White);
         _spriteBatch.End();
 
         base.Draw(gameTime);
