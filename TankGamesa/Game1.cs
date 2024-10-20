@@ -1,4 +1,5 @@
 ﻿using System.Media;
+using System.Windows.Forms.VisualStyles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,18 +13,20 @@ public class Game1 : Game
     Player player;
     Bullet bullet;
     KeyboardState state = Keyboard.GetState();
+    
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+
     }
 
     protected override void Initialize()
     {
         Window.AllowUserResizing = true;
         Window.AllowAltF4 = true;
-        
+        Window.Title = "almost War Thunder";
         // TODO: Add your initialization logic here
         
         base.Initialize();
@@ -50,7 +53,9 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-        player.Move();
+        float maxY = Window.ClientBounds.Height;
+        float maxX = Window.ClientBounds.Width;
+        player.Move(maxX,maxY , (float)gameTime.ElapsedGameTime.TotalSeconds, 5f);
         base.Update(gameTime);
     }
 
@@ -58,8 +63,8 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin();
-        _spriteBatch.Draw(player.texture, Player.spritePosition, Color.White);
-        _spriteBatch.Draw(bullet.texture, bullet.position, Color.White);   
+        _spriteBatch.Draw(player.texture, player.Rect, null, Color.White, Player.TankRotation, new Vector2(player.texture.Width /2f, player.texture.Height /2f), SpriteEffects.None, 0f);
+        //_spriteBatch.Draw(bullet.texture, bullet.position, Color.White);   
         _spriteBatch.End();
         base.Draw(gameTime);
     }
