@@ -39,7 +39,7 @@ public class Game1 : Game
         //playerTexture = new Texture2D(GraphicsDevice, 1, 1);
         //playerTexture.SetData<Color>(new Color[] { Color.White });
         playerTexture = Content.Load<Texture2D>(@"JpzE100");
-        player = new Player(playerTexture, Vector2.Zero, 2f);
+        player = new Player(playerTexture, Vector2.Zero, 100f);
         
         Texture2D bulletTexture;
         bulletTexture = new Texture2D(GraphicsDevice, 1, 1);
@@ -64,7 +64,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin();
         _spriteBatch.Draw(player.texture, player.Rect, null, Color.White, Player.TankRotation, new Vector2(player.texture.Width /2f, player.texture.Height /2f), SpriteEffects.None, 0f);
-        //_spriteBatch.Draw(bullet.texture, bullet.position, Color.White);   
+        //_spriteBatch.Draw(bullet.texture, bullet.Rect, null, Color.White, bullet.position, new Vector2(player.texture.Width /2f, player.texture.Height /2f), SpriteEffects.None, 0f);   
         _spriteBatch.End();
         base.Draw(gameTime);
     }
