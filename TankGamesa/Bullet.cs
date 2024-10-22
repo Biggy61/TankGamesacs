@@ -3,17 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TankGamesa;
 
-public class Bullet : Sprite
+public class Bullet(Texture2D texture, Vector2 position, float speed) : Sprite(texture, position)
 {
-    public float speed; 
-    public static Vector2 Point= Player.TankPosition;
-    public Rectangle Rect
-    {
-        get { return new Rectangle((int)Point.X / 2, (int)Point.Y  + 5, 25, 25); }
-    }
+    public static Vector2 Point = Player.TankPosition;
 
-    public Bullet(Texture2D texture, Vector2 position, float speed) : base(texture, position)
+    public static Rectangle BulletRect
     {
-        this.speed = speed;
+        get { return new Rectangle((int)Point.X / 2, (int)Point.Y + 5, 25, 25); }
     }
 }
