@@ -9,7 +9,7 @@ namespace TankGamesa;
 
 public class Player : Sprite
 {
-    public static Vector2 TanskPosition = Vector2.Zero;
+    public static Vector2 TankPosition = Vector2.Zero;
     readonly float Speed;
     public static float TankRotation;
 

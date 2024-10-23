@@ -12,6 +12,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     Player player;
     Bullet bullet; 
+    Turret turret;
     Texture2D bulletTexture;
     KeyboardState state = Keyboard.GetState();
 
@@ -41,6 +42,10 @@ public class Game1 : Game
         playerTexture = Content.Load<Texture2D>(@"JpzE100");
         player = new Player(playerTexture, Vector2.Zero, 100f);
 
+
+        Texture2D turretTexture;
+        turretTexture = Content.Load<Texture2D>(@"JpzE100");
+        turret = new Turret(turretTexture, Vector2.Zero, 100f);
         
         //bulletTexture = new Texture2D(GraphicsDevice, 1, 1);
         //bulletTexture.SetData<Color>(new Color[] { Color.White });
@@ -58,6 +63,7 @@ public class Game1 : Game
         float maxY = Window.ClientBounds.Height;
         float maxX = Window.ClientBounds.Width;
         player.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f);
+        turret.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f);
         player.Shoot(bulletTexture);
         base.Update(gameTime);
     }
@@ -67,6 +73,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin();
         _spriteBatch.Draw(player.texture, player.PlayerRect, null, Color.White, Player.TankRotation, new Vector2(player.texture.Width / 2f, player.texture.Height / 2f), SpriteEffects.None, 0f);
+        _spriteBatch.Draw(turret.texture, turret.TurretRect, null, Color.White, Turret.TurretRotation, new Vector2(player.texture.Width / 2f, player.texture.Height / 2f), SpriteEffects.None, 0f);
         //_spriteBatch.Draw(bullet.texture, bullet.Rect, null, Color.White, bullet.speed, new Vector2(player.texture.Width /2f, player.texture.Height), SpriteEffects.None, 0f);   
         _spriteBatch.End();
         base.Draw(gameTime);
