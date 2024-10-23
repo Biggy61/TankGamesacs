@@ -11,7 +11,7 @@ public class Turret : Sprite
 
     public Rectangle TurretRect
     {
-        get { return new Rectangle((int)Player.TankPosition.X, (int)Player.TankPosition.Y, 50, 50); }
+        get { return new Rectangle((int)Player.TankPosition.X, (int)Player.TankPosition.Y + 10, 50, 100); }
     }
 
 
@@ -19,10 +19,12 @@ public class Turret : Sprite
     {
         Speed = speed;
     }
-
+      
     public void Move(float maxX, float maxY, float gametime, float tankRotSpeed)
     {
         KeyboardState state = Keyboard.GetState();
+
+        
         float turretRotationSpeed = tankRotSpeed;
 
 
@@ -35,7 +37,7 @@ public class Turret : Sprite
         {
             TurretRotation -= turretRotationSpeed * gametime;
         }
-
+        
         if (state.IsKeyDown(Keys.Up))
         {
             //Player.TankPosition.X += Speed * (float)Math.Sin(TurretRotation) * gametime;

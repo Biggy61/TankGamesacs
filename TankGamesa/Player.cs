@@ -7,23 +7,21 @@ using SharpDX.Direct3D9;
 
 namespace TankGamesa;
 
-public class Player : Sprite
+public class 
+    Player : Sprite
 {
     public static Vector2 TankPosition = Vector2.Zero;
     readonly float Speed;
     public static float TankRotation;
 
-    public Rectangle PlayerRect => new((int)TankPosition.X, (int)TankPosition.Y, 50, 100);
+    public Rectangle PlayerRect => new((int)TankPosition.X, (int)TankPosition.Y + 10, 50, 100);
     
     public Player(Texture2D texture, Vector2 position, float speed) : base(texture, position, speed)
     {
         Speed = speed;
     }
 
-    public void Shoot(Texture2D bullettexture)
-    {
-        Bullet bullet = new Bullet(bullettexture, new Vector2((int)Bullet.BulletRect.X, (int)Bullet.BulletRect.Y), Speed);
-    }
+
     
     public void Move(float maxX, float maxY, float gametime, float tankRotSpeed)
     {
