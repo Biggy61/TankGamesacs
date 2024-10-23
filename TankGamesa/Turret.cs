@@ -7,7 +7,6 @@ namespace TankGamesa;
 
 public class Turret : Sprite
 {
-    public static Vector2 TurretPosition = Vector2.Zero;
     public static float TurretRotation;
 
     public Rectangle TurretRect
@@ -30,31 +29,27 @@ public class Turret : Sprite
         if (state.IsKeyDown(Keys.Right))
         {
             TurretRotation += turretRotationSpeed * gametime;
-            //TankPosition.X += 1;
         }
 
         if (state.IsKeyDown(Keys.Left))
         {
             TurretRotation -= turretRotationSpeed * gametime;
-            //TankPosition.X -= 1;
         }
 
         if (state.IsKeyDown(Keys.Up))
         {
-            Player.TankPosition.X += Speed * (float)Math.Sin(TurretRotation) * gametime;
-            Player.TankPosition.Y -= Speed * (float)Math.Cos(TurretRotation) * gametime;
-            //TankPosition.Y -= 1;
+            //Player.TankPosition.X += Speed * (float)Math.Sin(TurretRotation) * gametime;
+            //Player.TankPosition.Y -= Speed * (float)Math.Cos(TurretRotation) * gametime;
         }
 
         if (state.IsKeyDown(Keys.Down))
         {
-            Player.TankPosition.X -= Speed * (float)Math.Sin(TurretRotation) * gametime;
-            Player.TankPosition.Y += Speed * (float)Math.Cos(TurretRotation) * gametime;
-            //TankPosition.Y += 1;
+            //Player.TankPosition.X -= Speed * (float)Math.Sin(TurretRotation) * gametime;
+            //Player.TankPosition.Y += Speed * (float)Math.Cos(TurretRotation) * gametime;
         }
         
-        TurretPosition.X = Single.Clamp(TurretPosition.X, 0 + TurretRect.Width, maxX - TurretRect.Width);
-        TurretPosition.Y = Single.Clamp(TurretPosition.Y, 0 + TurretRect.Height / 2f, maxY - TurretRect.Height / 2f);
+        Player.TankPosition.X = Single.Clamp( Player.TankPosition.X, 0 + TurretRect.Width, maxX - TurretRect.Width);
+        Player.TankPosition.Y = Single.Clamp( Player.TankPosition.Y, 0 + TurretRect.Height / 2f, maxY - TurretRect.Height / 2f);
 
     }
 }

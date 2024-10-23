@@ -14,8 +14,7 @@ public class Player : Sprite
     public static float TankRotation;
 
     public Rectangle PlayerRect => new((int)TankPosition.X, (int)TankPosition.Y, 50, 100);
-
-
+    
     public Player(Texture2D texture, Vector2 position, float speed) : base(texture, position, speed)
     {
         Speed = speed;
