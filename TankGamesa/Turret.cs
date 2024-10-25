@@ -8,13 +8,13 @@ namespace TankGamesa;
 public class Turret : Sprite
 {
     public static float TurretRotation;
-
-    public Rectangle TurretRect
+    KeyboardState state = Keyboard.GetState();
+     MouseState mouse = Mouse.GetState();
+    public static Rectangle TurretRect
     {
         get { return new Rectangle((int)Player.TankPosition.X, (int)Player.TankPosition.Y + 10, 50, 100); }
     }
-
-
+    
     public Turret(Texture2D texture, Vector2 position, float speed) : base(texture, position, speed)
     {
         Speed = speed;
@@ -23,7 +23,7 @@ public class Turret : Sprite
     public void Move(float maxX, float maxY, float gametime, float tankRotSpeed)
     {
         KeyboardState state = Keyboard.GetState();
-
+        float MouseRotation = (float) Math.Atan2(mouse.Y - TurretRect.Y, mouse.X - TurretRect.X);
         
         float turretRotationSpeed = tankRotSpeed;
 
