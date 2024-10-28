@@ -12,17 +12,15 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     Player player;
-    Bullet bullet; 
+    Bullet bullet;
     Turret turret;
     Texture2D bulletTexture;
     public Vector2 Position = Vector2.Zero;
     KeyboardState state = Keyboard.GetState();
-    static MouseState mouse = Mouse.GetState();
-    public static Vector2 mousePosition = new Vector2(mouse.X, mouse.Y);
-    public static Vector2 direction = mousePosition - Player.TankPosition;
+
     public Rectangle BulletRect
     {
-      get {return new Rectangle((int)Position.X,(int) Position.Y, 2, 2); }
+        get { return new Rectangle((int)Position.X, (int)Position.Y, 50, 50); }
     }
 
     public Game1()
@@ -55,29 +53,41 @@ public class Game1 : Game
         Texture2D turretTexture;
         turretTexture = Content.Load<Texture2D>(@"Turret");
         turret = new Turret(turretTexture, Vector2.Zero, 100f);
-        
+
         //bulletTexture = new Texture2D(GraphicsDevice, 1, 1);
         //bulletTexture.SetData<Color>(new Color[] { Color.White });
         bulletTexture = Content.Load<Texture2D>(@"Round");
-        bullet = new Bullet(bulletTexture, Position,  100f, direction);
-        
+        //bullet = new Bullet(bulletTexture, Position, 100f, direction);
     }
 
     protected override void Update(GameTime gameTime)
-    {        
-        direction.Normalize();
-        Position += direction * bullet.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-
-   
-    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+    {
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
             Keyboard.GetState().IsKeyDown(Keys.Escape))
+
             Exit();
+
+        var mouse = Mouse.GetState();
+        Vector2 mousePosition = new Vector2(mouse.X, mouse.Y);
+        Vector2 Turretposition = new Vector2(Turret.TurretRect.X, Turret.TurretRect.Y);
+        Vector2 TurretDirection = mousePosition - Turretposition;
+        Turret.TurretRotation = (float)Math.Atan2(TurretDirection.Y, TurretDirection.X);
+
+        Vector2 BulletDirection =
+            new Vector2((float)Math.Cos(Turret.TurretRotation), (float)Math.Sin(Turret.TurretRotation));
+
+        Position += BulletDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * player.Speed;
+        //Position = Vector2.Add(Position, BulletDirection);
+
+
+        // Position += direction * bullet.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        Console.WriteLine(mouse);
+
         float maxY = Window.ClientBounds.Height;
         float maxX = Window.ClientBounds.Width;
         player.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f);
         turret.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f);
-        bullet.ShootBullet(Position);
+        //bullet.BulletRect(Position);
         // player.Shoot(bulletTexture);
         base.Update(gameTime);
     }
@@ -85,29 +95,25 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        
-        // if (mouse.LeftButton == ButtonState.Pressed )
-        // { 
-        //     _spriteBatch.Begin();
-        //     _spriteBatch.Draw(bullet.texture, bullet.BulletRect, Color.White);  
-        //     _spriteBatch.End();
-        // }
 
-      
 
         _spriteBatch.Begin();
-        //bullet.Draw(_spriteBatch, bulletTexture, direction);
-        _spriteBatch.Draw(bulletTexture, BulletRect, Color.White);
-        _spriteBatch.Draw(player.texture, player.PlayerRect, null, Color.White, Player.TankRotation, new Vector2(player.texture.Width / 2f, player.texture.Height / 1.7f), SpriteEffects.None, 0f);
-        _spriteBatch.Draw(turret.texture, Turret.TurretRect, null, Color.White, Turret.TurretRotation, new Vector2(turret.texture.Width /2f, turret.texture.Height /1.5f), SpriteEffects.None, 0f);
+        if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+        {
+            //dat BulletRect do bullet classy udelat to aby se vzdy vytvorila nova instance
+            _spriteBatch.Draw new Bullet(bulletTexture, BulletRect, Color.White);
+           
+        }
+
+
+        _spriteBatch.Draw(player.texture, player.PlayerRect, null, Color.White, Player.TankRotation,
+            new Vector2(player.texture.Width / 2f, player.texture.Height / 1.7f), SpriteEffects.None, 0f);
+
+        _spriteBatch.Draw(turret.texture, Turret.TurretRect, null, Color.White, Turret.TurretRotation,
+            new Vector2(turret.texture.Width / 2f, turret.texture.Height / 1.5f), SpriteEffects.None, 0f);
         _spriteBatch.End();
-    
-       
-        
-          
-            
+
+
         base.Draw(gameTime);
     }
-    
-
 }
