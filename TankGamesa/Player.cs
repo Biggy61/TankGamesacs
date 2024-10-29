@@ -14,15 +14,14 @@ public class
     readonly float Speed;
     public static float TankRotation;
 
-    public Rectangle PlayerRect => new((int)TankPosition.X, (int)TankPosition.Y + 10, 50, 100);
-    
-    public Player(Texture2D texture, Vector2 position, float speed) : base(texture, position, speed)
+    public  Rectangle PlayerRect => new((int)TankPosition.X, (int)TankPosition.Y + 10, 50, 100);
+
+    public Player(Texture2D texture, float speed) : base(texture, speed)
     {
         Speed = speed;
     }
 
 
-    
     public void Move(float maxX, float maxY, float gametime, float tankRotSpeed)
     {
         KeyboardState state = Keyboard.GetState();
