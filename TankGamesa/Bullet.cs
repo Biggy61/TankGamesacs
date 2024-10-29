@@ -17,7 +17,7 @@ public class Bullet
     static MouseState mouse = Mouse.GetState();
     public Rectangle BulletRect
     {
-        get { return new Rectangle((int)Position.X, (int)Position.Y, 50, 50); }
+        get { return new Rectangle((int)Position.X, (int)Position.Y, 10, 10); }
     }
 
     public Bullet(Texture2D texture, Vector2 position, Vector2 direction, float speed, float lifeTime)

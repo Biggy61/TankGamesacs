@@ -24,7 +24,8 @@ public class Game1 : Game
     public bool Shoot = true;
     private const float TTL = 3f;
     private List<Bullet> bullets;
-    private const float BulletSpeed = 200f;
+    private const float BulletSpeed = 600f;
+    public float timer;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -77,7 +78,7 @@ public class Game1 : Game
 
         Vector2 direction = mousePosition - Player.TankPosition;
         direction.Normalize();
-        Turret.TurretRotation = (float)Math.Atan2(direction.Y, direction.X);
+        Turret.TurretRotation = (float)Math.Atan2(direction.Y, direction.X) + Single.Pi / 2;
 
         
         
@@ -121,10 +122,12 @@ public class Game1 : Game
         // player.Shoot(bulletTexture);
         
         var mouseState = Mouse.GetState();
-        if (mouseState.LeftButton == ButtonState.Pressed && Shoot)
+        timer += dt;
+        if (mouseState.LeftButton == ButtonState.Pressed && Shoot && timer > 2)
         {
             ShootProjectile();
             Shoot = false;
+            timer = 0;
         }
         else if (mouseState.LeftButton == ButtonState.Released)
         {
