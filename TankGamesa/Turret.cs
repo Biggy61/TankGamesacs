@@ -7,7 +7,7 @@ namespace TankGamesa;
 
 public class Turret : Sprite
 {
-    public static float TurretRotation;
+    public float TurretRotation;
     KeyboardState state = Keyboard.GetState();
      MouseState mouse = Mouse.GetState();
     public static Rectangle TurretRect

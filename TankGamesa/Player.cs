@@ -7,14 +7,14 @@ using SharpDX.Direct3D9;
 
 namespace TankGamesa;
 
-public class 
+public class
     Player : Sprite
 {
     public static Vector2 TankPosition = Vector2.Zero;
     readonly float Speed;
-    public static float TankRotation;
+    public float TankRotation;
 
-    public  Rectangle PlayerRect => new((int)TankPosition.X, (int)TankPosition.Y + 10, 50, 100);
+    public Rectangle PlayerRect => new((int)TankPosition.X, (int)TankPosition.Y + 10, 50, 100);
 
     public Player(Texture2D texture, float speed) : base(texture, speed)
     {
@@ -31,30 +31,26 @@ public class
         if (state.IsKeyDown(Keys.D))
         {
             TankRotation += tankRotationSpeed * gametime;
-            //TankPosition.X += 1;
         }
 
         if (state.IsKeyDown(Keys.A))
         {
             TankRotation -= tankRotationSpeed * gametime;
-            //TankPosition.X -= 1;
         }
-        
+
         if (state.IsKeyDown(Keys.W))
         {
-             TankPosition.X += Speed * (float)Math.Sin(TankRotation) * gametime;
-             TankPosition.Y -= Speed * (float)Math.Cos(TankRotation) * gametime;
-             //TankPosition.Y -= 1;
+            TankPosition.X += Speed * (float)Math.Sin(TankRotation) * gametime;
+            TankPosition.Y -= Speed * (float)Math.Cos(TankRotation) * gametime;
         }
-        
+
         if (state.IsKeyDown(Keys.S))
         {
             TankPosition.X -= Speed * (float)Math.Sin(TankRotation) * gametime;
             TankPosition.Y += Speed * (float)Math.Cos(TankRotation) * gametime;
-            //TankPosition.Y += 1;
         }
 
-        TankPosition.X = Single.Clamp(TankPosition.X, 0 + PlayerRect.Width, maxX - PlayerRect.Width);
-        TankPosition.Y = Single.Clamp(TankPosition.Y, 0 + PlayerRect.Height / 2f, maxY - PlayerRect.Height / 2f);
+        TankPosition.X = Single.Clamp(TankPosition.X, 0 + PlayerRect.Height / 2.3f, maxX - PlayerRect.Height / 2.3f);
+        TankPosition.Y = Single.Clamp(TankPosition.Y, 0 + PlayerRect.Height / 3f, maxY - PlayerRect.Height / 2f);
     }
 }
