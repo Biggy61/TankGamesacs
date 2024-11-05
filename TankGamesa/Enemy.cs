@@ -33,18 +33,16 @@ public class
         {
             for (int i = 0; i < 20; i++)
             {
-                            TankRotation += tankRotationSpeed * gametime;
+                TankRotation += tankRotationSpeed * gametime;
             }
-
         }
 
         if (rand is > 2 and <= 4)
         {
             for (int i = 0; i < 20; i++)
             {
-                          TankRotation -= tankRotationSpeed * gametime;
+                TankRotation -= tankRotationSpeed * gametime;
             }
-  
         }
 
         if (rand is > 4 and <= 7)
@@ -54,7 +52,6 @@ public class
                 EnemyPosition.X += Speed * (float)Math.Sin(TankRotation) * gametime;
                 EnemyPosition.Y -= Speed * (float)Math.Cos(TankRotation) * gametime;
             }
-
         }
 
         if (rand is > 7 and <= 10)
@@ -62,9 +59,8 @@ public class
             for (int i = 0; i < 20; i++)
             {
                 EnemyPosition.X -= Speed * (float)Math.Sin(TankRotation) * gametime;
-                EnemyPosition.Y += Speed * (float)Math.Cos(TankRotation) * gametime;   
+                EnemyPosition.Y += Speed * (float)Math.Cos(TankRotation) * gametime;
             }
-
         }
 
 

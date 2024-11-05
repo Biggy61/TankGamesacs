@@ -11,10 +11,13 @@ public class Bullet
     private Vector2 _position;
     private Vector2 _direction;
     private float _speed;
+
     public float LifeTime { get; private set; }
+
     //public static Vector2 Point = Player.TankPosition;
     public static Vector2 Position = new Vector2(Turret.Rect.X, Turret.Rect.Y);
     static MouseState mouse = Mouse.GetState();
+
     public Rectangle BulletRect
     {
         get { return new Rectangle((int)Position.X, (int)Position.Y, 10, 10); }
@@ -28,20 +31,20 @@ public class Bullet
         _speed = speed;
         LifeTime = 0f;
     }
-    public void Update(float deltaTime ,Rectangle enemy)
-        {
-            if (BulletRect.Intersects(enemy))
-            {
-                Console.WriteLine("Bohata");
-            }
-            _position += _direction * _speed * deltaTime;
-            LifeTime += deltaTime;
 
+    public void Update(float deltaTime, Rectangle enemy)
+    {
+        if (BulletRect.Intersects(enemy))
+        {
+            Console.WriteLine("Bohata");
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(_texture, _position, Color.White);
-        }
-    
+        _position += _direction * _speed * deltaTime;
+        LifeTime += deltaTime;
+    }
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(_texture, _position, Color.White);
+    }
 }

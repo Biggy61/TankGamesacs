@@ -117,6 +117,7 @@ public class Game1 : Game
             if (bullets[i].BulletRect.Intersects(enemy.EnemyRect))
             {
                 Console.WriteLine("xdddd");
+                bullets.RemoveAt(i);
             }
 
             if (bullets[i].LifeTime > TTL)

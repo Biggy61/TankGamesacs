@@ -13,11 +13,6 @@ public class
     public static Vector2 TankPosition = Vector2.Zero;
     readonly float Speed;
     public float TankRotation;
-    float Rotchange;
-    float changeX;
-    float changeY;
-   float changeXX;
-    float changeYY;
     public Rectangle PlayerRect => new((int)TankPosition.X, (int)TankPosition.Y + 10, 50, 100);
 
     public Player(Texture2D texture, float speed) : base(texture, speed)
@@ -34,46 +29,25 @@ public class
 
         if (state.IsKeyDown(Keys.D))
         {
-            Rotchange += tankRotationSpeed * gametime;
+            TankRotation += tankRotationSpeed * gametime;
         }
 
         if (state.IsKeyDown(Keys.A))
         {
-            Rotchange -= tankRotationSpeed * gametime;
+            TankRotation -= tankRotationSpeed * gametime;
         }
-
-        TankRotation = Rotchange;
-         if (PlayerRect.Intersects(Rect))
-         {
-             TankRotation -= Rotchange;
-         }
 
         if (state.IsKeyDown(Keys.W))
         {
-            changeX = Speed * (float)Math.Sin(TankRotation) * gametime;
-            changeY = Speed * (float)Math.Cos(TankRotation) * gametime;
-            if (PlayerRect.Intersects(Rect))
-            {
-                changeX -= 1;
-                changeY += 1;
-            }
+            TankPosition.X += Speed * (float)Math.Sin(TankRotation) * gametime;
+            TankPosition.Y -= Speed * (float)Math.Cos(TankRotation) * gametime;
         }
-
-        TankPosition.X += changeX;
-        TankPosition.Y -= changeY;
-
+        
         if (state.IsKeyDown(Keys.S))
         {
-            changeXX = Speed * (float)Math.Sin(TankRotation) * gametime;
-            changeYY = Speed * (float)Math.Cos(TankRotation) * gametime;
-            if (PlayerRect.Intersects(Rect))
-            {
-                changeXX += 1;
-                changeYY -= 1;
-            }
+            TankPosition.X -= Speed * (float)Math.Sin(TankRotation) * gametime;
+            TankPosition.Y += Speed * (float)Math.Cos(TankRotation) * gametime;
         }
-        TankPosition.X -= changeXX;
-        TankPosition.Y += changeYY;
 
         TankPosition.X = Single.Clamp(TankPosition.X, 0 + PlayerRect.Height / 2.3f, maxX - PlayerRect.Height / 2.3f);
         TankPosition.Y = Single.Clamp(TankPosition.Y, 0 + PlayerRect.Height / 3f, maxY - PlayerRect.Height / 2f);
