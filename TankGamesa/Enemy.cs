@@ -31,24 +31,40 @@ public class
         int rand = rnd.Next(1, 10);
         if (rand <= 2)
         {
-            TankRotation += tankRotationSpeed * gametime;
+            for (int i = 0; i < 20; i++)
+            {
+                            TankRotation += tankRotationSpeed * gametime;
+            }
+
         }
 
         if (rand is > 2 and <= 4)
         {
-            TankRotation -= tankRotationSpeed * gametime;
+            for (int i = 0; i < 20; i++)
+            {
+                          TankRotation -= tankRotationSpeed * gametime;
+            }
+  
         }
 
-        if (rand is > 4 and <= 6)
+        if (rand is > 4 and <= 7)
         {
-            EnemyPosition.X += Speed * (float)Math.Sin(TankRotation) * gametime;
-            EnemyPosition.Y -= Speed * (float)Math.Cos(TankRotation) * gametime;
+            for (int i = 0; i < 20; i++)
+            {
+                EnemyPosition.X += Speed * (float)Math.Sin(TankRotation) * gametime;
+                EnemyPosition.Y -= Speed * (float)Math.Cos(TankRotation) * gametime;
+            }
+
         }
 
-        if (rand is > 6 and <= 8)
+        if (rand is > 7 and <= 10)
         {
-            EnemyPosition.X -= Speed * (float)Math.Sin(TankRotation) * gametime;
-            EnemyPosition.Y += Speed * (float)Math.Cos(TankRotation) * gametime;
+            for (int i = 0; i < 20; i++)
+            {
+                EnemyPosition.X -= Speed * (float)Math.Sin(TankRotation) * gametime;
+                EnemyPosition.Y += Speed * (float)Math.Cos(TankRotation) * gametime;   
+            }
+
         }
 
 

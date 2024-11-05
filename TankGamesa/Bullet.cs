@@ -28,10 +28,15 @@ public class Bullet
         _speed = speed;
         LifeTime = 0f;
     }
-    public void Update(float deltaTime)
+    public void Update(float deltaTime ,Rectangle enemy)
         {
+            if (BulletRect.Intersects(enemy))
+            {
+                Console.WriteLine("Bohata");
+            }
             _position += _direction * _speed * deltaTime;
             LifeTime += deltaTime;
+
         }
 
         public void Draw(SpriteBatch spriteBatch)

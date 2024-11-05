@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Media;
 using System.Windows.Forms.VisualStyles;
 using Microsoft.Xna.Framework;
@@ -83,22 +84,19 @@ public class Game1 : Game
         turret.TurretRotation = (float)Math.Atan2(direction.Y, direction.X) + Single.Pi / 2;
 
 
-        Console.WriteLine(mouse);
+        // Console.WriteLine(mouse);
 
         float maxY = Window.ClientBounds.Height;
         float maxX = Window.ClientBounds.Width;
-        player.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f);
+        player.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f, enemy.EnemyRect);
         turret.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f);
         enemyTimer += dt;
         if (enemyTimer > 1)
         {
-            enemy.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f);
+            enemy.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 1f);
 
             enemyTimer = 0;
         }
-       
-        //bullet.BulletRect(Position);
-        // player.Shoot(bulletTexture);
 
         var mouseState = Mouse.GetState();
         timer += dt;
@@ -115,13 +113,18 @@ public class Game1 : Game
 
         for (int i = bullets.Count - 1; i >= 0; i--)
         {
-            bullets[i].Update(dt);
+            bullets[i].Update(dt, enemy.EnemyRect);
+            if (bullets[i].BulletRect.Intersects(enemy.EnemyRect))
+            {
+                Console.WriteLine("xdddd");
+            }
 
             if (bullets[i].LifeTime > TTL)
             {
                 bullets.RemoveAt(i);
             }
         }
+
 
         base.Update(gameTime);
     }
@@ -135,8 +138,8 @@ public class Game1 : Game
 
         _spriteBatch.Draw(enemy.texture, enemy.EnemyRect, null, Color.White, enemy.TankRotation,
             new Vector2(enemy.texture.Width / 2f, enemy.texture.Height / 1.7f), SpriteEffects.None, 0f);
-        
-        
+
+
         _spriteBatch.Draw(player.texture, player.PlayerRect, null, Color.White, player.TankRotation,
             new Vector2(player.texture.Width / 2f, player.texture.Height / 1.7f), SpriteEffects.None, 0f);
 
@@ -157,9 +160,11 @@ public class Game1 : Game
     private void ShootProjectile()
     {
         Vector2 mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-        Vector2 projectileDirection = Vector2.Normalize(mousePosition - Player.TankPosition);
+        Vector2 position = new Vector2(Turret.TurretRect.X, Turret.TurretRect.Y);
+        Vector2 projectileDirection = Vector2.Normalize(mousePosition - position);
 
         Bullet newBullet = new Bullet(bulletTexture, Player.TankPosition, projectileDirection, BulletSpeed, 0f);
+
         bullets.Add(newBullet);
     }
 }
