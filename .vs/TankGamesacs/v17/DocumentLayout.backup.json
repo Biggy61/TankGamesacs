@@ -30,9 +30,9 @@
               "Title": "Game1.cs",
               "DocumentMoniker": "C:\\Users\\stepa\\Desktop\\TankGamesacs\\TankGamesa\\Game1.cs",
               "RelativeDocumentMoniker": "TankGamesa\\Game1.cs",
-              "ToolTip": "C:\\Users\\stepa\\Desktop\\TankGamesacs\\TankGamesa\\Game1.cs*",
-              "RelativeToolTip": "TankGamesa\\Game1.cs*",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\stepa\\Desktop\\TankGamesacs\\TankGamesa\\Game1.cs",
+              "RelativeToolTip": "TankGamesa\\Game1.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-23T18:03:56.65Z",
               "EditorCaption": ""
@@ -47,8 +47,7 @@
               "RelativeToolTip": "TankGamesa\\Bullet.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T18:03:22.522Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-23T18:03:22.522Z"
             },
             {
               "$type": "Document",

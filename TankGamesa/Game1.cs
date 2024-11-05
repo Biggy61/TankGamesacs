@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Media;
 using System.Windows.Forms.VisualStyles;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -29,6 +31,7 @@ public class Game1 : Game
     private const float BulletSpeed = 600f;
     public float timer;
     public float enemyTimer;
+    Song song;
 
     public Game1()
     {
@@ -50,6 +53,8 @@ public class Game1 : Game
 
     protected override void LoadContent()
     {
+        song = Content.Load<Song>("Song");
+        MediaPlayer.Play(song);
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         Texture2D playerTexture;
 
@@ -91,12 +96,12 @@ public class Game1 : Game
         player.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f, enemy.EnemyRect);
         turret.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 5f);
         enemyTimer += dt;
-        if (enemyTimer > 1)
+        if (enemyTimer > 0.5)
         {
             enemy.Move(maxX, maxY, (float)gameTime.ElapsedGameTime.TotalSeconds, 1f);
-
+         
             enemyTimer = 0;
-        }
+        } 
 
         var mouseState = Mouse.GetState();
         timer += dt;
@@ -113,6 +118,7 @@ public class Game1 : Game
 
         for (int i = bullets.Count - 1; i >= 0; i--)
         {
+
             bullets[i].Update(dt, enemy.EnemyRect);
             if (bullets[i].BulletRect.Intersects(enemy.EnemyRect))
             {

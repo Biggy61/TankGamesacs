@@ -29,40 +29,31 @@ public class
         float tankRotationSpeed = tankRotSpeed;
         Random rnd = new Random();
         int rand = rnd.Next(1, 10);
-        if (rand <= 2)
+        for (int i = 0; i < 20; i++)
         {
-            for (int i = 0; i < 20; i++)
+            if (rand <= 2)
             {
                 TankRotation += tankRotationSpeed * gametime;
             }
-        }
 
-        if (rand is > 2 and <= 4)
-        {
-            for (int i = 0; i < 20; i++)
+            if (rand is > 2 and <= 4)
             {
                 TankRotation -= tankRotationSpeed * gametime;
             }
-        }
 
-        if (rand is > 4 and <= 7)
-        {
-            for (int i = 0; i < 20; i++)
+
+            if (rand is > 4 and <= 7)
             {
                 EnemyPosition.X += Speed * (float)Math.Sin(TankRotation) * gametime;
                 EnemyPosition.Y -= Speed * (float)Math.Cos(TankRotation) * gametime;
             }
-        }
 
-        if (rand is > 7 and <= 10)
-        {
-            for (int i = 0; i < 20; i++)
+            if (rand is > 7 and <= 10)
             {
                 EnemyPosition.X -= Speed * (float)Math.Sin(TankRotation) * gametime;
                 EnemyPosition.Y += Speed * (float)Math.Cos(TankRotation) * gametime;
             }
         }
-
 
         EnemyPosition.X = Single.Clamp(EnemyPosition.X, 0 + EnemyRect.Height / 2.3f, maxX - EnemyRect.Height / 2.3f);
         EnemyPosition.Y = Single.Clamp(EnemyPosition.Y, 0 + EnemyRect.Height / 3f, maxY - EnemyRect.Height / 2f);
